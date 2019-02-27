@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Caracterização das ZA's do Sistema de abastecimento de água para consumo humano no concelho de Rio Maior</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <meta property="og:title" content="Sistema de Abastecimento de Água do Concelho de Rio Maior" />
+    <meta property="og:url" content="" />
+    <meta property="og:description" content="Caracterização das ZA's do Sistema de Abastecimento de Água do Concelho de Rio Maior" />
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="css/zas_style.css">
+    <link rel="stylesheet" href="css/control-minimap2.css" />
+    <link rel="stylesheet" href="css/ekko-lightbox.css"/>        
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inconsolata" />
+
+	<link rel="shortcut icon" href="img/favicon.png" type="image/png">
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/leaflet.ajax.min.js"></script>
+    <script src="js/storymap.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+	<script src="js/control-minimap.js" type="text/javascript"></script>
+	
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top navbar-toggleable-md" role="navigation">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header" style="left:10px; position: fixed;">
+            <a class="navbar-brand" href="index.html#">Início</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za1]').offset().top - $(window).scrollTop() - 100);">Asseiceira</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za2]').offset().top - $(window).scrollTop() - 100);">Assentiz</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za3]').offset().top - $(window).scrollTop() - 100);">Azambujeira</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za4]').offset().top - $(window).scrollTop() - 100);">Bairradas</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za5]').offset().top - $(window).scrollTop() - 100);">Casais da Cheira</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za6]').offset().top - $(window).scrollTop() - 100);">Malaqueijo</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za7]').offset().top - $(window).scrollTop() - 100);">Outeiro da Cortiçada</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za8]').offset().top - $(window).scrollTop() - 100);">Rio Maior</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za9]').offset().top - $(window).scrollTop() - 100);">RM1</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za10]').offset().top - $(window).scrollTop() - 100);">S. Sebastião</a>
+                </li>
+                <li>
+                    <a href="javascript:window.scrollBy(0, $('section[data-scene=za11]').offset().top - $(window).scrollTop() - 100);">Senhora da Luz</a>
+                </li>                
+                <li>
+            		<a  data-toggle="modal" data-target="#info-modal">Sobre</a>
+                </li>
+                <li>
+<!--                 <div class="dropdown">
+  					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    					Share
+  					</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    					<a class="dropdown-item" target="_blank" href="https://facebook.com/sharer.php?u=http://rawgit.com/cartobaldrica/water_atlas/master/infrastructure_index.html">Facebook</a><br/>
+   						<a class="dropdown-item" target="_blank" href="https://twitter.com/home?status=Oregon's%20Groundwater%0Ahttp%3A//rawgit.com/cartobaldrica/water_atlas/master/infrastructure_index.html">Twitter</a><br/>
+    					<a class="dropdown-item" target="_blank" href="https://github.com/cartobaldrica/water_atlas">Github</a>
+  					</div>-->
+				</div>
+				</li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+     <!-- /.container -->
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 main">
+        
+             <section data-scene="overview">
+				 	<div class= "overview-background-img background-fullscreen-setting text-responsive text-shadow: black 0.2em 0.2em 0.3em;"><h4 class="text-center" style="color: white">Abastecimento de água</h4><h4 class ="text-center" style="font-size:20px; margin-top:0px; color: #ffffff; text-shadow: black 0.2em 0.2em 0.3em; margin-left: 25%; margin-right:25%; text-align: justify;">O concelho de Rio Maior é constituído por diversas zonas de abastecimento de água para consumo humano, dstribuído pela rede de águas gerida pela Câmara Municipal de Rio Maior. As zonas de abatecimento de água, composto por 11 zonas, são diferentes, variando quer na sua dimensão e principalmente na origem da água.
+				 	<br></br></h4>
+                	<br/><br/>
+                	<p class ="text-center" style="font-size:14px; margin-top:12%; color: #ffffff; text-shadow: black 0.2em 0.2em 0.3em; margin-left: 30%; margin-right:30%; ">Criado e disponbilizado pelos serviços da Câmara Municipal de Rio Maior</p></div>
+                	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>            
+            </section>
+            
+            <section data-scene="zas">
+                <h3>Sistema de Asbastecimento de Água</h3>
+ 				<p>O sistema de abastecimento de água para condsumo humano, no concelho de Rio Maior, tem as seguintes características:</p>
+ 					<ul class="list" style="list-style-type:disc;">
+  						<li>composto por <strong>11</strong> zonas de abastecimento</li>
+  						<li><b>9</b> destas provém de <b>11</b> captações de água subterrânea próprias;</li>
+  						<li>Uma zona, a água provém da bacia de Castelo de Bode, fornecido em alta pela empresa Águas do Vale do Tejo, S.A. (Grupo Águas de Portugal);</li>
+  						<li>a restante zona a água é fornecida pelos Serviços Municipalizados de Caldas da Rainha;</li>
+  						<li><b>31</b> reservatórios de água;</li>
+  						<li>cerca de <b>485km</b> de rede;</li>
+  						<li>fornecendo água a cerca de <b>21 030 habitantes.</b></li>
+  					</ul>
+				<p>De seguida, caracterizamos melhore cada zona de abastecimento do sistema.</p>
+			</section>     
+			
+			<section data-scene="za1">
+				<h3>Asseiceira</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de Asseiceira serve cerca de <strong>959 habitantes</strong>, abastecidos através de uma captação de água subterrânea, “Furo de Asseiceira”, que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Asseiceira</li>
+  						<li>Casais Varõres</li>
+  						<li>Casais Quintinos</li>
+  						<li>Ribeira de Santo André</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+			</section>    
+			
+			<section data-scene="za2">
+				<h3>Assentiz</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de Asseentiz serve cerca de <b>420 habitantes</b>, abastecidos através de uma captação de água subterrânea, “Furo Assentiz”, que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Assentiz</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, com excepção de <b>2 situações de incumprimento</b>, que foram comunicadas à ERSAR e à Autoridade de Saúde. Estas situações foram avaliadas pela Autoridade de Saúde, que considerou não existir risco para a saúde humana. Poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+			</section> 
+			
+			<section data-scene="za3">
+				<h3>Azambujeira</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de Azambujeira serve cerca de <b>261 habitantes</b>, abastecidos através de uma captação de água subterrânea, “Furo de Calhariz”, que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Azambujeira</li>
+  						<li>Calhariz</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+			</section> 
+			
+			<section  data-scene="za4">
+                <h3>Bairradas</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de Bairradas serve cerca de <b>312 habitantes</b>, abastecidos através de uma captação de água subterrânea, “Furo de Bairradas”, que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Abuxanas <small>(parte norte)</small></li>
+  						<li>Bairradas</li>
+  						<li>Casais da Atalaia</li>
+  						<li>Casais da Mesquita</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+    		</section>
+    		
+    		<section  data-scene="za5">
+               <h3>Casais da Cheira</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de Casais da Cheira serve cerca de <b>330 habitantes</b>, abastecidos através de uma captação de água subterrânea, “Furo Casais da Cheira”, que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Casais da Cheira</li>
+  						<li>Casal Renal  <small>(parte norte)</small></li>
+  						<li>Fráguas</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+            </section>      
+             
+            <section data-scene="za6">
+               <h3>Malaqueijo</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de Malaqueijo serve cerca de <b>487 habitantes</b>, abastecidos através de uma captação de água subterrânea, “Furo Milhariças” e “Furo de Malaqueijo II”, que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Alfouvés</li>
+  						<li>Malaqueijo</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+            </section>
+            
+            <section data-scene="za7">
+                <h3>Outeiro da Cortiçada</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de Outeiro da Cortiçada serve cerca de <b>965 habitantes</b>, abastecidos através de uma captação de água subterrânea, “Furo do Outeiro da Cortiçada", que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Casal Renal <small>(parte sul)</small></li>
+  						<li>Casais da Cortiçada</li>
+  						<li>Casalinho</li>
+  						<li>Correias</li>
+  						<li>Outeiro da Cortiçada</li>
+  						<li>Porto da Vala</li>
+  						<li>Ribeira de Fráguas</li>
+  						<li>Vale de Alhos</li>
+  						<li>Vale do Brejo</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+            </section>
+
+            <section data-scene="za8">
+                <h3>Rio Maior</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de Rio Maior serve cerca de <b>13 213 habitantes</b>, água fornecida é de origem superficial e é comprada em Alta à empresa Águas do Vale do Tejo, S.A. (Grupo águas de Portugal), através de 6 pontos de entrega, que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Abuxanas</li>
+  						<li>Arco da Memória</li>
+  						<li>Anteporta</li>
+  						<li>Arrouquelas</li>
+  						<li>Arruda dos Pisões</li>
+  						<li>Azinheira</li>
+  						<li>Boiças</li>
+  						<li>Casais dos Silvas</li>
+  						<li>Cabeça Gorda</li>
+  						<li>Casais da Lezíria</li>
+  						<li>Casais da Arroteia</li>
+  						<li>Casais do Cidral</li>
+  						<li>Cidral</li>
+  						<li>Freiria</li>
+  						<li>Laroujo</li>
+  						<li>Vila da Marmeleira</li>
+  						<li>Malaqueijo <small>(parte)</small></li>
+  						<li>Quintas</li>
+  						<li>Quintão</li>
+  						<li>Ribeira de S. João</li>
+  						<li>Rio Maior</li>
+  						<li>S. João da Ribeira</li>
+  						<li>Vale de Óbidos;</li>
+  						<li>Valbom</li>
+  						<li>Vale Barco;</li>
+  						<li>Vale da Rosa;</li>
+  						<li>Vale do Brejo.</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+            </section>
+
+            <section data-scene="za9">
+                <h3>RM 1</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de RM 1 serve cerca de <b>3 247 habitantes</b>, abastecidos através de 2 captações de água subterrânea, “Furo Chichareira I” e “Furo Chichareira II”, que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Alto da Serra;</li>
+  						<li>Casal da Fisga;</li>
+  						<li>Casalinho;</li>
+  						<li>Mata de Baixo;</li>
+  						<li>Venda da Costa;</li>
+  						<li>Fonte da Bica;</li>
+  						<li>Marinhas do Sal;</li>
+  						<li>Pé da Serra;</li>
+  						<li>Vale Laranja;</li>
+  						<li>Teira;</li>
+  						<li>Portela de Teira;</li>
+  						<li>Fonte Longa;</li>
+  						<li>Lobo Morto;</li>
+  						<li>Caniceira;</li>
+  						<li>Casal da Velha;</li>
+  						<li>Valteira;</li>
+  						<li>Barbines;</li>
+  						<li>Chãos;</li>
+  						<li>Alcobertas;</li>
+  						<li>Ribeira de Cima;</li>
+  						<li>Alqueidão;</li>
+  						<li>Ribeira das Neves;</li>
+  						<li>Sourões;</li>
+  						<li>Casais Monizes.</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+            </section>
+
+            <section data-scene="za10">
+                <h3>São Sebastião</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento de São Sebastião serve cerca de <b>811 habitantes</b>, abastecidos através de uma captação de água subterrânea, “Furo de São Sebastião", que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Carvalhais;</li>
+  						<li>Estanganhola;</li>
+  						<li>Póvoas;</li>
+  						<li>Repolho;</li>
+  						<li>São Sebastião;</li>
+  						<li>Vale da Fonte.</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+            </section>
+
+            <section data-scene="za11">
+                <h3>Senhora da Luz</h3>
+                <h5>Características da Zona de Abastecimento</h5>
+ 				<p>A Zona de Abastecimento da Senhora da Luz, serve cerca de <b>25 habitantes</b>, abastecidos através de água fornecida é comprada em Alta ao Serviços Municipalizados de Caldas da Rainha, que serve os seguintes lugares:</p>
+ 					<ul class="list2" style="list-style-type:disc;">
+  						<li>Vale da Senhora da Luz.</li>
+  					</ul>
+  				<h5>Qualidade da água para consumo</h5>
+				<p>Os últimos resultados obtidos sobre a qualidade da água distribuída nesta zona de abastecimento cumprem com as normas de qualidade <a href="https://dre.pt/application/file/a/114311254" target="_blank">fixadas na legislação</a>, poderá obterinformação mais detalhada, <a href="http://www.cm-riomaior.pt/atividade-municipal/ambiente/item/1313-qualidade-da-agua" target="_blank">no sítio do município</a> ou no sítio da internet: <a href="www.ersar.pt" target="_blank">da ersar.</a>.</p>
+            </section>
+   
+            <section data-scene="end">
+				 	<div class= "end-background-img background-fullscreen-setting text-responsive"><br>
+            </section>
+        	<i class="animated zoomIn infinite glyphicon glyphicon-arrow-up arrow-up"></i>
+        	<i class="animated zoomIn infinite glyphicon glyphicon-arrow-down arrow-down"></i>
+
+        </div>
+        <div id="map" class="col-sm-6 col-md-8 sidebar"></div>
+    </div>
+	
+
+    
+    <div class="modal fade" id="info-modal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h2 class="modal-title" style="color:black;">Sobre</h2>
+                </div>
+                <div class="modal-body">
+                    <p2 style="font-size:20px">Dados Geográficos</p2><br>
+                    <p2>Zonas de abastecimento: <a href = "" target="_blank">Descarregar GeoJSON</a> ou <a href = "" target="_blank">KML</a></p2><br>
+                	<p2>Basemap by ESRI & OSM</p><br/>
+                  <br>
+                	<p2 style="font-size:20px">Outros dados</p2><br>
+                  <p2>Foto inicial por Marcelo Chagas from Pexels</p2><br>
+                  <p2>Foto final por rawpixel on Unsplash</p2><br>
+
+                </div>
+                <div class="modal-footer">
+                    <p2>Criado com <i class="fa fa-heart" style="color:#fc0202;"></i> e com recurso a software livre, <a href="https://leafletjs.com/" target="_blank">Leaflet</a> e <a href="https://github.com/jakobzhao/storymap" target="_blank">StorymapJS</a>. Poderá ser utilizado e distribuído sob a <a href="https://github.com/CMRioMaior/fgc_riomaior/blob/master/LICENSE" target="_blank">licença MIT.</p></a></p2>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!--    <div class="modal fade" id="share-modal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <a class="fa fa-facebook-square social2" style="font-size: 8em; display:inline;" href="https://facebook.com/sharer.php?u=http://rawgit.com/cartobaldrica/water_atlas/master/infrastructure_index.html" target="_blank"></a>
+    				<a class="fa fa-twitter-square social3" style="font-size: 8em; display:inline;" href="https://twitter.com/home?status=Oregon's%20Groundwater%0Ahttp%3A//rawgit.com/cartobaldrica/water_atlas/master/infrastructure_index.html" target="_blank"></a>
+					<a class="fa fa-github-square social3" style="font-size: 8em; display:inline;" href="https://github.com/cartobaldrica/water_atlas" target="_blank"></a>
+					<br/>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    
+</div>
+
+
+<script type="text/javascript">
+
+
+	 function style_za_s(feature) {
+            switch(String(feature.properties['za'])) {
+                case 'Asseiceira':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(217,39,167,0.5)',
+            }
+                    break;
+                case 'Assentiz':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(98,219,68,0.5)',
+            }
+                    break;
+                case 'Azambujeira':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(238,79,114,0.5)',
+            }
+                    break;
+                case 'Bairradas':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,54,217,0.5)',
+            }
+                    break;
+                case 'Casais da Cheira':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(166,206,73,0.5)',
+            }
+                    break;
+                case 'Malaqueijo':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,72,13,0.5)',
+            }
+                    break;
+                case 'Outeiro da Cortiçada':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(104,204,184,0.5)',
+            }
+                    break;
+                case 'Rio Maior':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(116,192,225,0.5)',
+            }
+                    break;
+                case 'RM1':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(210,194,128,0.5)',
+            }
+                    break;
+                case 'São Sebastião':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,239,97,0.5)',
+            }
+                    break;
+                case 'Senhora da Luz':
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,123,214,0.5)',
+            }
+                    break;
+                default:
+                    return {
+                opacity: 1,
+                color: 'rgba(31,120,180,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(44,76,204,0.5)',
+            }
+                    break;
+            
+            }
+        }
+
+    function za1Filter(feature) {
+      if (feature.properties.za === "Asseiceira") return true
+    }
+
+    function za2Filter(feature) {
+      if (feature.properties.za === "Assentiz") return true
+    }
+
+    function za3Filter(feature) {
+      if (feature.properties.za === "Azambujeira") return true
+    }
+
+    function za4Filter(feature) {
+      if (feature.properties.za === "Bairradas") return true
+    }
+
+    function za5Filter(feature) {
+      if (feature.properties.za === "Casais da Cheira") return true
+    }
+
+    function za6Filter(feature) {
+      if (feature.properties.za === "Malaqueijo") return true
+    }
+
+    function za7Filter(feature) {
+      if (feature.properties.za === "Outeiro da Cortiçada") return true
+    }
+
+    function za8Filter(feature) {
+      if (feature.properties.za === "Rio Maior") return true
+    }
+
+    function za9Filter(feature) {
+      if (feature.properties.za === "RM1") return true
+    }
+
+    function za10Filter(feature) {
+      if (feature.properties.za === "São Sebastião") return true
+    }
+
+    function za11Filter(feature) {
+      if (feature.properties.za === "Senhora da Luz") return true
+    }
+
+
+    var layers = {
+
+    	'za_s': [ L.geoJson.ajax('data/za_s.geojson', {
+    		style: style_za_s,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+        })
+        ],
+
+      'za1': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za1Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+      'za2': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za2Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+      'za3': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za3Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+      'za4': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za4Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+       'za5': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za5Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+        'za6': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za6Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+      'za7': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za7Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+      'za8': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za8Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+      'za9': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za9Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+       'za10': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za10Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ],
+
+        'za11': [ L.geoJson.ajax('data/za_s.geojson', {
+        filter: za11Filter,
+        fillColor: '#F89406',
+        weight: 2,
+        opacity: 1,
+        color: '#2C3E50',  //Outline color
+        fillOpacity: 0.7,
+            onEachFeature: function (feature, layer) {
+                layer.bindTooltip('Zona de abastecimento: ' + feature.properties.za , {sticky: true, className: "feature-label", permanent: false, offset: [0, 0]})
+            }
+      })
+      ]   		
+    };
+
+    var scenes = {
+            overview: {lat: 39.34954989, lng:-8.93294206, zoom: 12, name:'Home', position:'fullpage'},
+			      zas: {lat: 39.34954989, lng:-8.93294206, zoom: 12, layers:['za_s']},
+            za1: {lat: 39.29435807, lng:-8.94637643, zoom: 15, layers:['za1']},
+            za2: {lat: 39.25611813, lng:-8.86231903, zoom: 15, layers:['za2']},
+            za3: {lat: 39.27442475, lng:-8.79351859, zoom: 15, layers:['za3']},
+            za4: {lat: 39.31407076, lng:-8.97681214, zoom: 15, layers:['za4']},
+            za5: {lat: 39.37893162, lng:-8.85605936, zoom: 15, layers:['za5']},
+            za6: {lat: 39.28729555, lng:-8.81785248, zoom: 14, layers:['za6']},
+            za7: {lat: 39.34756718, lng:-8.84140458, zoom: 14, layers:['za7']},
+            za8: {lat: 39.30482043, lng:-8.93435325, zoom: 13, layers:['za8']},
+            za9: {lat: 39.39705398, lng:-8.93828700, zoom: 13,  layers:['za9']},
+            za10: {lat: 39.36797089, lng:-8.90506913, zoom: 14, layers:['za10']},
+            za11: {lat: 39.34392707, lng:-8.99316605, zoom: 20, layers:['za11']},
+            end: {lat: 39.34954989, lng:-8.93294206, zoom: 12, name:'End', position:'fullpage'}
+    };
+    
+    
+
+    $('.main').storymap({
+        scenes: scenes,
+        layers:layers,
+        legend: false,
+        scale:false,
+        navbar: true,
+        createMap: function () {
+            // create a map in the "map" div, set the view to a given place and zoom
+                var map = L.map('map',{zoomControl:false,  scrollWheelZoom:false}).setView([39.32379272, -8.90140420], 11);
+            // add an basemap, which can be either OSM, mapbox, tilelayer, wmslayer or those designed by yourself.
+           		/*L.tileLayer.wms("http://localhost:8080/geoserver/basemap/wms", {
+        			layers: 'basemap:basemap_dark',
+       				format: 'image/png',
+       				minZoom: 6,
+        			maxZoom: 15,
+        			transparent: true,
+        		attribution: "Created by Gareth Baldrica-Franklin"
+    			}).addTo(map);
+    			
+    			L.tileLayer.wms("http://localhost:8080/geoserver/basemap/wms", {
+        			layers: 'basemap:basemap_dark_labels',
+        			format: 'image/png',
+        			minZoom: 6,
+        			maxZoom: 15,
+        			transparent: true,
+        			tiled: true, 
+        			tilesorigin: [-180, 90]
+    			}).addTo(map);
+    			*/
+    			
+				var Esri_WorldTopoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ, TomTom, Intermap, iPC, USGS, FAO, NPS, NRCAN, GeoBase, Kadaster NL, Ordnance Survey, Esri Japan, METI, Esri China (Hong Kong), and the GIS User Community'
+}).addTo(map);
+				
+ 				
+ 				var mini = new L.tileLayer('https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+	maxZoom: 30,
+	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+				
+				var miniMap = new L.Control.MiniMap(mini, { toggleDisplay: false});
+ 				
+				miniMap.addTo(map);
+			
+				new L.Control.Zoom({ position: 'bottomright'}).addTo(map);
+
+
+				map.setMaxBounds(map.getBounds());
+
+            return map;
+        }
+    });
+    
+    document.getElementsByClassName("leaflet-control-attribution")[0].style.visibility = "hidden";
+
+    
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+   		event.preventDefault();
+    $(this).ekkoLightbox();
+	});
+
+</script>
+</body>
+</html>
