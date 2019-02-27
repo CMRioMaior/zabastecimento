@@ -1,6 +1,6 @@
 # Zonas de abastecimento
 
-StoryMap das Zonas de Abastecimento do Concelhode Rio Maior
+StoryMap das Zonas de Abastecimento do Concelho de Rio Maior
 
 Criado com recurso a software livre:
 
